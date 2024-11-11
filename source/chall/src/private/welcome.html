@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/pico.slate.min.css">
+    <meta name="color-scheme" content="light">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <title>XSS - 1</title>
 </head>
 <body>
 <div class="main-container">
     <h1>XSS - 1</h1>
-    <p>Craft an XSS loaded url for <a href="/visit-me" target="_blank"><span id="baseUrl"></span>visit-me</a> that logs <b
-            style="font-family: monospace;">"XSS!!!"</b>
-        to the console, and submit it in the form below.
+    <p>Craft an XSS-loaded url for <a href="/visit-me" target="_blank"><span id="baseUrl"></span>visit-me</a> that logs <b
+            style="font-family: monospace;">I_FOUND_AN_XSS!!!</b>
+        to the console, and submit it for verification.
         <br>
-        We will check it if your payload worked, and give you back the flag.</p>
+        If your payload works we will give you the 🚩</p>
     <p></p>
     <div class="form-container">
         <form action="/submit-url" method="POST" onsubmit="onSubmit()">

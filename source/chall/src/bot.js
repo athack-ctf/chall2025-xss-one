@@ -2,13 +2,11 @@ const puppeteer = require('puppeteer');
 
 const sleep = ms => new Promise(res => setTimeout(res, ms));
 
-async function checkConsoleLogForProof(url, proofString = 'xss!!!', timeout = 2000) {
-    const browser = await puppeteer.launch(
-        {
-            executablePath: '/usr/bin/google-chrome',
-            args: ['--disable-web-security', '--no-sandbox'],
-        }
-    );
+async function visitPageAndCheckForProof(url, proofString, timeout = 2000) {
+    const browser = await puppeteer.launch({
+        executablePath: '/usr/bin/google-chrome', args: ['--disable-web-security', '--no-sandbox'],
+    });
+
     const page = await browser.newPage();
 
     // Create a variable to track if proofString is logged
@@ -16,7 +14,7 @@ async function checkConsoleLogForProof(url, proofString = 'xss!!!', timeout = 20
 
     // Listen for console events on the page
     page.on('console', (msg) => {
-        if (msg.text().includes(proofString)) {
+        if (msg.text() === proofString) {
             proofFound = true;
         }
     });
@@ -33,4 +31,4 @@ async function checkConsoleLogForProof(url, proofString = 'xss!!!', timeout = 20
     return proofFound;
 }
 
-module.exports = {checkConsoleLogForProof}
+module.exports = {visitPageAndCheckForProof}

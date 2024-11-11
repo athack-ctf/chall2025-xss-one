@@ -1,10 +1,4 @@
-# Start from the official Node.js image
 FROM node:18-slim
-
-#RUN apt-get update && apt-get install -y curl gnupg wget
-#RUN curl -o- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-#    && echo "deb https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
-#    && apt-get -y install google-chrome-stable libnss3-dev libgdk-pixbuf2.0-dev libgtk-3-dev libxss-dev libasound2
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
@@ -20,15 +14,19 @@ RUN apt-get update && apt-get install curl gnupg -y \
 # Set working directory
 WORKDIR /chall
 
+# Copying stuff
 COPY chall/ .
 
-# Using unpriviliged user 'app'
+# Using unpriviliged user
 RUN useradd -m user
 RUN chown -R user .
 USER user
 
+# Installing dependencies
 RUN npm install --silent
-#RUN npx puppeteer browsers install chrome
 
-# Run the Puppeteer chall script
+# Exposing port
+EXPOSE 2025
+
+# Running web server
 CMD ["npm", "start"]

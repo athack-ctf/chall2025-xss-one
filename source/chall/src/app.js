@@ -2,10 +2,12 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const {isValidHttpUrl, validatePagePath, swapUrlComponents} = require("./utils");
-const {checkConsoleLogForProof} = require("./bot");
+const {visitPageAndCheckForProof} = require("./bot");
 
 // Port 2025
 const port = 2025;
+const timeout = 2000;
+const proof = "I_FOUND_AN_XSS!!!";
 
 // Serve static files from the "public" folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -43,9 +45,8 @@ app.post('/submit-url', async (req, res) => {
 
 
     // Check if the XSS payload worked
-    const xssPayloadWorked = await checkConsoleLogForProof(safeUrl, "xss!!!", 2000);
+    const xssPayloadWorked = await visitPageAndCheckForProof(safeUrl, proof, timeout);
 
-    // TODO: Use a headless browser to check if the payload got executed
     if (!xssPayloadWorked) {
         res.sendFile(path.join(__dirname, 'private', 'no-flag.html'));
         return;
