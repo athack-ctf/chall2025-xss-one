@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const {isValidHttpUrl, validatePagePath, swapUrlComponents} = require("./utils");
+const {checkConsoleLogForProof} = require("./bot");
 
 // Port 2025
 const port = 2025;
@@ -40,8 +41,17 @@ app.post('/submit-url', async (req, res) => {
     // Fixing url (in case it points somewhere else)
     const safeUrl = swapUrlComponents(url, "http", "localhost", port);
 
-    // TODO: Use a headless browser to check if the payload got executed
 
+    // Check if the XSS payload worked
+    const xssPayloadWorked = await checkConsoleLogForProof(safeUrl, "xss!!!", 2000);
+
+    // TODO: Use a headless browser to check if the payload got executed
+    if (!xssPayloadWorked) {
+        res.sendFile(path.join(__dirname, 'private', 'no-flag.html'));
+        return;
+    }
+
+    // Return the flag page
     res.sendFile(path.join(__dirname, 'private', 'flag.html'));
 });
 

@@ -10,17 +10,17 @@
 <body>
 <div class="main-container">
     <h1>XSS - 1</h1>
-    <p>Craft a reflected XSS for <a href="/visit-me"><span id="baseUrl"></span>visit-me</a> that logs <b
+    <p>Craft an XSS loaded url for <a href="/visit-me" target="_blank"><span id="baseUrl"></span>visit-me</a> that logs <b
             style="font-family: monospace;">"XSS!!!"</b>
         to the console, and submit it in the form below.
         <br>
         We will check it if your payload worked, and give you back the flag.</p>
     <p></p>
     <div class="form-container">
-        <form action="/submit-url" method="POST">
+        <form action="/submit-url" method="POST" onsubmit="onSubmit()">
             <label for="urlInput"></label>
             <input id="urlInput" type="url" name="url" placeholder="" required>
-            <input type="submit" value="Submit">
+            <button id="submitButton" type="submit">Submit</button>
         </form>
     </div>
 </div>
@@ -31,5 +31,11 @@
         document.getElementById("baseUrl").textContent = window.location.href;
         document.getElementById("urlInput").placeholder = `${window.location.href}visit-me`;
     };
+
+    function onSubmit() {
+        const button = document.getElementById('submitButton');
+        button.disabled = true;
+        button.innerHTML = "Submitting...";
+    }
 </script>
 </html>

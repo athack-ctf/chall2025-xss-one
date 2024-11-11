@@ -10,7 +10,18 @@
 <body>
 <div class="main-container">
     <h1>Visit Me</h1>
-    <p>...</p>
+    <p>Hello, <span id="hello"></span>!</p>
 </div>
+
+<script>
+    window.onload = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        let helloParam = urlParams.get('hello');
+        if (!helloParam) {
+            helloParam = 'Guest'; // Default value
+        }
+        document.getElementById('hello').innerHTML = helloParam;
+    };
+</script>
 </body>
 </html>
