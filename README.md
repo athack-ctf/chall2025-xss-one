@@ -1,13 +1,13 @@
-# Chall - XSS - 1
+# Chall - XSS - One
 
-> Basic XSS injection challenge meant for the beginner track: XSS - 1
+> Basic XSS injection challenge meant for the beginner track: XSS - One
 
 ## Type
 
 - [ ] **OFF**line
 - [X] **ON**line
 
-## Designer(s)
+## Designer
 
 - Anis
 
