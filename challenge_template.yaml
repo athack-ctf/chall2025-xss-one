@@ -1,0 +1,29 @@
+name: "XSS One"
+author: ""
+category: <Web>
+description: |
+    Show us how you can make websites behave badly.
+
+    [Start your challenge instance](https://instancer.athackctf.com/chall2025-xss-one/create)
+    
+value: 0
+
+# Let's put the challenges as standard for now and we can script to change
+type: standard
+
+
+# Flags specify answers that your challenge use. You should generally provide at least one.
+flags:
+  - type: "static"
+    content: "ATHACKCTF{0xAAY0U_DID_FIND_AN_X55_HA0xFFHAHA}"
+    data: "case_insensitive"
+
+
+# Available: beginner, interac
+tags:
+  - beginner
+
+# Put hidden by default
+state: hidden
+
+version: "0.1"
