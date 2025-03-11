@@ -1,0 +1,22 @@
+name: "XSS One"
+author: "Anis"
+category: Web
+description: |
+    Show us how you can make websites behave badly.
+    
+value: 50
+
+type: standard
+
+flags:
+  - type: "static"
+    content: "ATHACKCTF{0xAAY0U_DID_FIND_AN_X55_HA0xFFHAHA}"
+    data: "case_insensitive"
+
+tags:
+  - beginner
+  - http
+
+state: visible
+
+version: "0.1"
