@@ -1,13 +1,13 @@
+version: '3.8'
 services:
   xss-one:
+    image: athack-ctf/chall2025-xss-one:latest
     build: .
+    hostname: xss-one
+    ports:
+    - 52052:2025
     deploy:
       resources:
         limits:
           cpus: '0.12'
           memory: 300m
-    hostname: xss-one
-    image: athack-ctf/chall2025-xss-one:latest
-    ports:
-    - 52052:2025
-version: '3.8'
